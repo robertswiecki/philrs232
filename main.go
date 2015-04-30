@@ -62,30 +62,35 @@ func main() {
 	flag.Parse()
 
 	commands := map[string]string{
-		"ON":       "\x18\x02",
-		"OFF":      "\x18\x01",
-		"PIC-NORM": "\x3A\x00",
-		"PIC-CUST": "\x3A\x01",
-		"PIC-REAL": "\x3A\x02",
-		"PIC-FULL": "\x3A\x03",
-		"PIC-21-9": "\x3A\x04",
-		"PIC-DYN":  "\x3A\x05",
-		"PIP-OFF":  "\x3C\x00\x00\x00\x00",
-		"PIP-BL":   "\x3C\x01\x00\x00\x00",
-		"PIP-TL":   "\x3C\x01\x01\x00\x00",
-		"PIP-TR":   "\x3C\x01\x02\x00\x00",
-		"PIP-BR":   "\x3C\x01\x03\x00\x00",
-		"VOL0":     "\x44\x00",
-		"VOL10":    "\x44\x0A",
-		"VOL20":    "\x44\x14",
-		"VOL30":    "\x44\x1e",
-		"VOL40":    "\x44\x28",
-		"VOL50":    "\x44\x32",
-		"VOL60":    "\x44\x3C",
-		"VOL70":    "\x44\x46",
-		"VOL80":    "\x44\x50",
-		"VOL90":    "\x44\x5A",
-		"VOL100":   "\x44\x64",
+		"ON":        "\x18\x02",
+		"OFF":       "\x18\x01",
+		"PIC-NORM":  "\x3A\x00",
+		"PIC-CUST":  "\x3A\x01",
+		"PIC-REAL":  "\x3A\x02",
+		"PIC-FULL":  "\x3A\x03",
+		"PIC-21-9":  "\x3A\x04",
+		"PIC-DYN":   "\x3A\x05",
+		"PIP-OFF":   "\x3C\x00\x00\x00\x00",
+		"PIP-BL":    "\x3C\x01\x00\x00\x00",
+		"PIP-TL":    "\x3C\x01\x01\x00\x00",
+		"PIP-TR":    "\x3C\x01\x02\x00\x00",
+		"PIP-BR":    "\x3C\x01\x03\x00\x00",
+		"VOL0":      "\x44\x00",
+		"VOL10":     "\x44\x0A",
+		"VOL20":     "\x44\x14",
+		"VOL30":     "\x44\x1e",
+		"VOL40":     "\x44\x28",
+		"VOL50":     "\x44\x32",
+		"VOL60":     "\x44\x3C",
+		"VOL70":     "\x44\x46",
+		"VOL80":     "\x44\x50",
+		"VOL90":     "\x44\x5A",
+		"VOL100":    "\x44\x64",
+/* It redefines current mode setting
+		"M-NORM":    "\x32\x32\x32\x32\x32\x32",
+		"M-MOVIE":   "\x32\x64\x32\x32\x5A\x32",
+*/
+		"REP-INPUT": "\xAD",
 	}
 
 	val, ok := commands[*cmdFlag]
@@ -138,6 +143,8 @@ func main() {
 	termios.Cflag |= syscall.CS8
 	termios.Cflag |= syscall.CLOCAL
 	termios.Cflag |= syscall.CREAD
+
+	termios.Iflag |= syscall.IGNPAR
 
 	switch *speedFlag {
 	case 1200:
