@@ -56,7 +56,7 @@ func main() {
 	portFlag := flag.String("port", "/dev/ttyUSB0", "RS232C port")
 	cmdFlag := flag.String("cmd", "", "Command")
 	custFlag := flag.String("cust", "", "Custom command, encoded as a C string")
-	altFlag := flag.Bool("alt", false, "Don't prepend \"\xA6\x01\x00\x00\x00\" prefix")
+	altFlag := flag.Bool("alt", false, "Don't prepend the \"\\xA6\\x01\\x00\\x00\\x00\" prefix")
 	helpFlag := flag.Bool("help", false, "Help")
 	speedFlag := flag.Int("speed", 9600, "ttyS speed")
 	flag.Parse()
