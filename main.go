@@ -91,6 +91,11 @@ func main() {
 		"M-MOVIE":   "\x32\x64\x32\x32\x5A\x32",
 */
 		"REP-INPUT": "\xAD",
+		"IN-VGA":    "\xAC\x05\x00\x01\x00",
+		"IN-HDMI":   "\xAC\x06\x02\x01\x00",
+		"IN-MHDMI":  "\xAC\x06\x03\x01\x00",
+		"IN-DP":     "\xAC\x09\x04\x01\x00",
+		"IN-MDP":    "\xAC\x09\x05\x01\x00",
 	}
 
 	val, ok := commands[*cmdFlag]
